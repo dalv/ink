@@ -1,0 +1,63 @@
+body {
+   background-color:#e5e5e5;
+   color:#666;
+   font:normal 13px Roboto,arial,sans-serif;
+   padding:0px;
+}
+
+#title {
+	text-align:center;
+	padding:15px;
+ 	width:90%;
+ 	background:#FFF;
+  border:1px solid #AAA;
+  border-bottom:2px solid #BBB;
+  margin:0px auto 25px auto;
+  font-size:14;
+  font-weight:bold;
+}
+
+.storyCard {
+	text-align:left;
+	padding:6px;
+	width:80%;
+  background:#FFF;
+  border:1px solid #AAA;
+  border-bottom:2px solid #BBB;
+  margin:15px auto;
+}
+
+/* =================== */
+/* x-editable override */
+/* =================== */
+.editable-buttons {
+	margin:0px;
+	padding:0px;
+	display:block;
+}
+
+ button{
+	margin:4px 5px 4px 0px;
+	padding:0px;
+	cursor:pointer;
+	border:none;
+	outline:none;
+	background:none!important;
+	color:#4080FF;
+}
+
+ button:hover {
+	color:#80C0FF;
+}
+
+.editable-click, .editable-click:hover, a.editable-click, a.editable-click:hover {
+	text-decoration:none;
+	color:#666;
+	border-bottom-color:none;
+}
+
+.editable-click,a.editable-click {
+	text-decoration:none;
+	color:#666;
+	border-bottom:none;
+}

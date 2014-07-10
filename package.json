@@ -1,0 +1,14 @@
+{
+  "name": "Ink",
+  "version": "0.0.1",
+  "description": "A world made of ink",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "^4.4.5",
+    "mongoose": "^3.8.12"
+  }
+}

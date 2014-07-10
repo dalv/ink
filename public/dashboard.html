@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html ng-app="dashboard">
+<head>
+	<title>Admin Dashboard</title>
+
+	<link href="lib/angular-xeditable-0.1.8/css/xeditable.css" rel="stylesheet"> <!-- x-editable styles -->
+ 	<link rel="stylesheet" type="text/css" href="./css/dashboard.css" /> <!-- page styles -->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script><!-- load jquery -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script><!-- load angular -->
+	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script> <!-- x-editable component -->
+	<script src="js/controllers/dashboardController.js"></script> <!-- dashboard controller -->
+	<script src="js/services/storyService.js"></script> <!-- story service -->
+	<script src="js/core.js"></script> <!-- main application -->
+
+</head>
+
+<body ng-controller="dashboardController">
+	<div class="wrapper">
+
+		<div id="title">Admin dashboard</div>
+		<div id="stories" >
+			<div class ="storyCard" ng-repeat="story in stories">
+				
+				<!-- Delete Story -->
+				<button ng-click="deleteStory(story)"> x </button>
+
+				<!-- Story Text -->
+				<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
+					{{story.text || 'empty'}} 
+				</div>
+		
+				<!-- Story Options -->
+				<table class = "storyOptions">
+					<tr ng-repeat="option in story.opts"> 
+						<td>
+							<button ng-click="deleteOption(story, option)"> x </button>
+						<td> 
+							<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'empty'}} </div>
+						</td> 
+						<td>
+							<div class="storyOptionNext" buttons="no" editable-select="option.next"
+								e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
+								{{ getPreviewById(option.next) || 'empty'}} 
+							</div>	
+						</td>
+					</tr>
+				</table>
+
+				<!-- New option controls -->	 
+				<button ng-click="createOption(story)"> New Option </button>
+
+			</div>
+
+			<!-- New story -->	 
+			<button ng-click="createStory()"> New Story </button>
+
+		</div>
+
+	</div>
+</body>
+</html>
