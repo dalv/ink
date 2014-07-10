@@ -35,7 +35,3 @@ Icon
 .Spotlight-V100
 .Trashes
 
-# =========================
-# Node Module directory
-# =========================
-/node_modules/*
