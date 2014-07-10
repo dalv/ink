@@ -122,4 +122,12 @@ angular.module('dashboardController', [])
 		}
 		return preview;
 	};		
+
+	// =================================================
+	// Helper functions
+	// =================================================
+	$scope.nl2br = function nl2br (str) {      
+    return str.replace(new RegExp('\r?\n','g'), '<br />');
+	};
+
 });

@@ -28,7 +28,7 @@
 
 				<!-- Story Text -->
 				<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
-					{{story.text || 'empty'}} 
+					<pre>{{story.text || 'empty'}}</pre>
 				</div>
 		
 				<!-- Story Options -->
@@ -42,7 +42,7 @@
 						<td>
 							<div class="storyOptionNext" buttons="no" editable-select="option.next"
 								e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-								{{ getPreviewById(option.next) || 'empty'}} 
+								{{getPreviewById(option.next) || 'empty'}} 
 							</div>	
 						</td>
 					</tr>
