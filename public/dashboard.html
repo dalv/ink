@@ -19,42 +19,62 @@
 <body ng-controller="dashboardController">
 	<div class="wrapper">
 
-		<div id="title">Admin dashboard</div>
-		<div id="stories" >
+		<div id="top">
+			<div id="title">Admin dashboard</div>
+			<div id="top-controls">
+				<button ng-click="expandAll(true)">expand all</button>
+				<button ng-click="expandAll(false)">collapse all</button>
+			</div>
+		</div>
+
+		<div id="stories">
 			<div class ="storyCard" ng-repeat="story in stories">
-				
-				<!-- Delete Story -->
-				<button ng-click="deleteStory(story)"> x </button>
 
-				<!-- Story Text -->
-				<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
-					<pre>{{story.text || 'empty'}}</pre>
+				<!-- ============== -->	
+				<!-- COLLAPSED CARD -->				
+				<!-- ============== -->	
+				<div class="storyPreview" ng-show="!story.isExpanded" ng-click="story.isExpanded=true"> {{getPreviewById(story._id) || 'empty'}} </div>
+
+				<!-- ============= -->	
+				<!-- EXPANDED CARD -->		
+				<!-- ============= -->	
+				<div class="storyContent" ng-show="story.isExpanded">	
+					<div class="storyBarTop" ng-click="story.isExpanded=false">
+						<!-- Delete Story -->
+						<button class="buttonDeleteStory" ng-click="deleteStory(story)" title="Delete Story"> x </button>
+					</div>
+
+					<!-- Story Text -->
+					<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
+						<pre>{{story.number}}. {{story.text || 'empty'}}</pre>
+					</div>
+
+					<hr/>
+			
+					<!-- Story Options -->
+					<table class = "storyOptions">
+						<tr ng-repeat="option in story.opts"> 
+							<td>
+								<button ng-click="deleteOption(story, option)" title="Delete Option"> x </button>
+							<td> 
+								<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'empty'}} </div>
+							</td> 
+							<td>
+								<div class="storyOptionNext" buttons="no" editable-select="option.next"
+									e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
+									{{getPreviewById(option.next) || 'empty'}} 
+								</div>	
+							</td>
+						</tr>
+					</table>
+
+					<!-- New option controls -->	 
+					<button ng-click="createOption(story)"> New Option </button>
 				</div>
-		
-				<!-- Story Options -->
-				<table class = "storyOptions">
-					<tr ng-repeat="option in story.opts"> 
-						<td>
-							<button ng-click="deleteOption(story, option)"> x </button>
-						<td> 
-							<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'empty'}} </div>
-						</td> 
-						<td>
-							<div class="storyOptionNext" buttons="no" editable-select="option.next"
-								e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-								{{getPreviewById(option.next) || 'empty'}} 
-							</div>	
-						</td>
-					</tr>
-				</table>
-
-				<!-- New option controls -->	 
-				<button ng-click="createOption(story)"> New Option </button>
 
 			</div>
-
-			<!-- New story -->	 
-			<button ng-click="createStory()"> New Story </button>
+			<!-- New story -->	
+			<div class ="storyCard">	<button ng-click="createStory()"> New Story </button> </div>
 
 		</div>
 

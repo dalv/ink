@@ -23,20 +23,37 @@ angular.module('dashboardController', [])
 	// =============================================
 	var setStories = function(data){
 		// =============================================
-		// Attach preview property
+		// Attach properties: preview and number
 		// =============================================
+		var storyNumber = 1;
+
 		data.forEach(function(s){
+			s.number = storyNumber;
+			storyNumber = storyNumber + 1;
+
 			var storyPreview = "";
 			if(s.text != undefined) {
-				var storyTextArray = s.text.split(" ");
+				var txtArray = s.text.split(" ");
 
-				if(storyTextArray.length >= 3)
-					storyPreview = storyTextArray[0] + " " + storyTextArray[1] + " " + storyTextArray[2] + " ...";
+				if(txtArray.length >= 3)
+					storyPreview = s.number + ". " + txtArray[0] + " " + txtArray[1] + " " + txtArray[2] + " ...";
 				else
-					storyPreview = s.text;
+					storyPreview = s.number + ". " + s.text;
 			}
 
 			s.preview = storyPreview;
+
+			// =============================================
+			// If this is a post back, get some data form the previous story collection
+			// =============================================
+			if ($scope.stories != undefined)
+			{
+				var prevStory = getStoryById(s._id);
+				if(prevStory != undefined)
+				{
+					s.isExpanded = prevStory.isExpanded;
+				}
+			}
 		});
 
 		// =============================================
@@ -69,10 +86,12 @@ angular.module('dashboardController', [])
 	// Delete story
 	// =================================================
 	$scope.deleteStory = function(story) {
-		storyService.delete(story._id)
-			.success(function(data) {
-				setStories(data);
-			});
+		if (window.confirm("Are you sure you want to delete this story?"))	{		
+			storyService.delete(story._id)
+				.success(function(data) {
+					setStories(data);
+				});
+			}
 	};
 
 	// =================================================
@@ -89,20 +108,22 @@ angular.module('dashboardController', [])
 	// Delete story
 	// =================================================
 	$scope.deleteOption = function(story, option) {
-		var optionIndex = story.opts.indexOf(option);
-		if(optionIndex > -1) {
-			story.opts.splice(optionIndex, 1);
-			storyService.update(story)
-			.success(function(data) {
-				setStories(data);
-			});
+		if (window.confirm("Are you sure you want to delete this option?"))	{
+			var optionIndex = story.opts.indexOf(option);
+			if(optionIndex > -1) {
+				story.opts.splice(optionIndex, 1);
+				storyService.update(story)
+				.success(function(data) {
+					setStories(data);
+				});
+			}
 		}
 	};
 
 	// =================================================
 	// Find story by id
 	// =================================================
-	$scope.getStoryById = function(storyId) {
+	var getStoryById = function(storyId) {
 		var story = undefined;
 		for (var i = 0; i < $scope.stories.length; i++) {
 			if($scope.stories[i]._id == storyId) {
@@ -115,13 +136,22 @@ angular.module('dashboardController', [])
 
 	$scope.getPreviewById = function(storyId) {
 		var preview = "";
-		var story = $scope.getStoryById(storyId);
+		var story = getStoryById(storyId);
 		if (story != undefined)
 		{
 			preview = story.preview;
 		}
 		return preview;
 	};		
+
+	// =================================================
+	// Expand/Collapse Story Cards
+	// =================================================
+	$scope.expandAll = function(expand) {
+		$scope.stories.forEach(function(s){
+			s.isExpanded = expand;
+		});
+	};
 
 	// =================================================
 	// Helper functions

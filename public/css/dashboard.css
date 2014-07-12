@@ -5,7 +5,11 @@ body {
    padding:0px;
 }
 
-#title {
+pre {
+	   font:normal 13px Roboto,arial,sans-serif;
+}
+
+#top {
 	text-align:center;
 	padding:15px;
  	width:90%;
@@ -15,6 +19,10 @@ body {
   margin:0px auto 25px auto;
   font-size:14;
   font-weight:bold;
+}
+
+#top-controls{
+	text-align: right;
 }
 
 .storyCard {
@@ -27,12 +35,23 @@ body {
   margin:15px auto;
 }
 
+.storyPreview, .storyBarTop {
+	width:100%;
+	cursor:pointer;
+}
+
+/* Blocks of text */
 pre {
  white-space: pre-wrap;       /* css-3 */
  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
  white-space: -pre-wrap;      /* Opera 4-6 */
  white-space: -o-pre-wrap;    /* Opera 7 */
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.storyOptionNext {
+	padding-left:10px;
+	color:#aaa!important;
 }
 
 /* =================== */
@@ -70,7 +89,11 @@ pre {
 	border-bottom:none;
 }
 
-.editable-wrap, .editable-wrap .editable-controls, .editable-wrap .editable-controls>textarea{
-	width:90%;
+/* Some shoddy css here just to get a wide tall textbox */
+.editable-wrap , editable-textarea, .editable-wrap .editable-controls>textarea {
+		width:100%;
+}
+
+.editable-wrap .editable-controls, .editable-wrap .editable-controls>textarea{
 	height:200px;
 }
