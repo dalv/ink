@@ -1,4 +1,4 @@
-angular.module('storyService', [])
+angular.module('ink')
 
 	// super simple service
 	// each function returns a promise object 

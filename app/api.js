@@ -49,8 +49,20 @@
 		StoryModel.update(
 			{_id : req.body._id}, 
 			{ 
-				text : req.body.text, 
-				opts: req.body.opts
+				text: 								req.body.text, 
+				opts: 								req.body.opts,
+				bg_img: 							req.body.bg_img,
+				modifier: 						req.body.modifier,
+				modifier_text: 				req.body.modifier_text,
+				modifier_desc: 				req.body.modifier_desc,
+				modifier_img: 				req.body.modifier_img,
+				redirect: 						req.body.redirect,
+				redirect_seconds: 		req.body.redirect_seconds,	
+				redirect_to: 					req.body.redirect_to,	
+				exhaustable: 					req.body.exhaustable,	
+				exhaustable_opt_text: req.body.exhaustable_opt_text,	
+				exhaustable_opt_next: req.body.exhaustable_opt_next,
+				risk_level: 					req.body.risk_level					
 			},
 		  function(err, story) {
 			if (err)
@@ -99,6 +111,21 @@
 				});				
 			}
 		});
-	}		
+	}
+
+	// =============================================
+	// Add new option to story object by id
+	// =============================================  
+	api.uploadModifier = function(req, res) {
+		console.log("attempting to upload modifier");
+	}
+
+	// =============================================
+	// Add new option to story object by id
+	// =============================================  
+	api.uploadBackground = function(req, res) {
+		console.log("attempting to upload bg");
+	}
+
 
 })(module.exports);

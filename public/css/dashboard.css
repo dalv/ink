@@ -40,6 +40,10 @@ pre {
 	cursor:pointer;
 }
 
+.storyModifier, .storyRedirect, .storyExhaustable {
+	margin-bottom:10px;
+}
+
 /* Blocks of text */
 pre {
  white-space: pre-wrap;       /* css-3 */

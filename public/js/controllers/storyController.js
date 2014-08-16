@@ -1,6 +1,4 @@
-angular.module('storyController', [])
-
-  // inject the StoryService factory into our controller
+angular.module('ink')
   .controller('storyController', function($scope, $http, storyService) {
 
 	// GET =====================================================================

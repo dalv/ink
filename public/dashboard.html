@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="dashboard">
+<html ng-app="ink">
 <head>
 	<title>Admin Dashboard</title>
 
@@ -10,9 +10,9 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script><!-- load jquery -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script><!-- load angular -->
 	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script> <!-- x-editable component -->
+	<script src="js/app.js"></script> <!-- main application -->
 	<script src="js/controllers/dashboardController.js"></script> <!-- dashboard controller -->
 	<script src="js/services/storyService.js"></script> <!-- story service -->
-	<script src="js/core.js"></script> <!-- main application -->
 
 </head>
 
@@ -33,48 +33,126 @@
 				<!-- ============== -->	
 				<!-- COLLAPSED CARD -->				
 				<!-- ============== -->	
-				<div class="storyPreview" ng-show="!story.isExpanded" ng-click="story.isExpanded=true"> {{getPreviewById(story._id) || 'empty'}} </div>
+				<div class="storyPreview" ng-show="!story.isExpanded" ng-click="story.isExpanded=true"> 
+					<!--<pre>{{story.number}}. {{story.text}}</pre>-->	
+					<!--{{getPreviewById(story._id)}}-->
+					{{getPreviewById(story._id)}}
+				</div>
 
 				<!-- ============= -->	
 				<!-- EXPANDED CARD -->		
 				<!-- ============= -->	
 				<div class="storyContent" ng-show="story.isExpanded">	
 					<div class="storyBarTop" ng-click="story.isExpanded=false">
-						<!-- Delete Story -->
 						<button class="buttonDeleteStory" ng-click="deleteStory(story)" title="Delete Story"> x </button>
 					</div>
 
+					<!-- ========== -->	
 					<!-- Story Text -->
+					<!-- ========== -->	
 					<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
-						<pre>{{story.number}}. {{story.text || 'empty'}}</pre>
+						<pre>{{story.number}}. {{story.text || 'Story text'}}</pre>
 					</div>
 
-					<hr/>
-			
+					<!-- --> <hr/> <!-- -->
+					
+					<!-- ============= -->	
 					<!-- Story Options -->
+					<!-- ============= -->	
 					<table class = "storyOptions">
 						<tr ng-repeat="option in story.opts"> 
 							<td>
 								<button ng-click="deleteOption(story, option)" title="Delete Option"> x </button>
 							<td> 
-								<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'empty'}} </div>
+								<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'Option text'}} </div>
 							</td> 
 							<td>
 								<div class="storyOptionNext" buttons="no" editable-select="option.next"
 									e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-									{{getPreviewById(option.next) || 'empty'}} 
+									{{getPreviewById(option.next) || 'Select outcome'}} 
 								</div>	
 							</td>
 						</tr>
 					</table>
 
-					<!-- New option controls -->	 
 					<button ng-click="createOption(story)"> New Option </button>
-				</div>
 
+					<!-- --> <hr/> <!-- -->	
+
+					<!-- ======== -->	
+					<!-- Modifier -->
+					<!-- ======== -->	
+					<input class="storyModifier" type="checkbox" ng-model="story.modifier" ng-change="updateStory(story)">Modifier</input>
+
+					<div ng-show="story.modifier"> 
+						<div class="modifierText" editable-text="story.modifier_text" onaftersave="updateStory(story)"> 
+							{{story.modifier_text || 'Modifier text'}} 
+						</div>
+						<div class="modifierDesc" editable-textarea="story.modifier_desc" onaftersave="updateStory(story)"> 
+							<pre>{{story.modifier_desc || 'Modifier description'}}</pre>
+						</div>					
+					</div>
+
+					<!-- --> <hr/> <!-- -->	
+
+					<!-- ======== -->	
+					<!-- Redirect -->
+					<!-- ======== -->	
+					<input class="storyRedirect" type="checkbox" ng-model="story.redirect" ng-change="updateStory(story)">Redirect</input>
+
+					<table ng-show="story.redirect"> <tr><td>
+						<div class="redirectSeconds" editable-text="story.redirect_seconds" onaftersave="updateStory(story)"> 
+							Redirect after {{story.redirect_seconds || 'undefined'}} seconds to
+						</div> </td><td>
+						<div class="storyOptionNext" buttons="no" editable-select="story.redirect_to"
+							e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
+							{{getPreviewById(story.redirect_to) || 'Select outcome'}} 
+						</div> </td></tr>
+					</table>		
+
+					<!-- --> <hr/> <!-- -->	
+
+					<!-- =========== -->	
+					<!-- Exhaustable -->
+					<!-- =========== -->	
+					<input class="storyExhaustable" type="checkbox" ng-model="story.exhaustable" ng-change="updateStory(story)">Exhaustable</input>
+
+					<table ng-show="story.exhaustable"> <tr><td>
+						<div class="exhaustableNewOption" editable-text="story.exhaustable_opt_text" onaftersave="updateStory(story)"> 
+							{{story.exhaustable_opt_text || 'New option text'}} 
+						</div> </td><td>
+						<div class="storyOptionNext" buttons="no" editable-select="story.exhaustable_opt_next"
+							e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
+							{{getPreviewById(story.exhaustable_opt_next) || 'Select outcome'}} 
+						</div> </td></tr>
+					</table>	
+
+					<!-- --> <hr/> <!-- -->	
+
+					<!-- ========== -->	
+					<!-- Risk level -->
+					<!-- ========== -->	
+					<table> <tr><td>
+						<div>Risk level: </div>	</td><td>
+						<div class="riskLevel" buttons="no" editable-select="story.risk_level"
+							e-ng-options="level.value as level.text for level in riskLevels" onaftersave="updateStory(story)"> 
+							{{getRiskLevel(story.risk_level) || 'undefined'}} 
+						</div> </td></tr>
+					</table>	
+
+					<!-- --> <hr/> <!-- -->	
+	
+					<!-- ================ -->	
+					<!-- Background image -->
+					<!-- ================ -->	
+					<div>Background </div>	
+					<input type="file" ng-model="background_image" onchange="angular.element(this).scope().uploadBackgroundImage(this)" >
+
+				</div>
 			</div>
+
 			<!-- New story -->	
-			<div class ="storyCard">	<button ng-click="createStory()"> New Story </button> </div>
+			<div class ="storyCard"> <button ng-click="createStory()"> New Story </button> </div>
 
 		</div>
 

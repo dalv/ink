@@ -37,4 +37,8 @@ module.exports = function(app) {
 
 	// Delete story
 	app.delete('/api/stories/:story_id', api.delete);	
+
+		// Upload files
+	app.post('/api/upload/modifier', api.uploadModifier);	
+	app.post('/api/upload/background', api.uploadBackground);	
 }
