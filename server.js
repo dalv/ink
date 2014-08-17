@@ -18,6 +18,7 @@ require('./app/routes')(app);
 
 // Run server
 var server = http.createServer(app);
-server.listen(8000);
+var port = process.env.PORT || 8080;
+server.listen(port);
 
-console.log("Listening on port 8000...")
+console.log("Listening on port " + port + "...")
