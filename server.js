@@ -20,4 +20,4 @@ require('./app/routes')(app);
 var server = http.createServer(app);
 server.listen(8000);
 
-console.log("Listening...")
+console.log("Listening on port 8000...")
