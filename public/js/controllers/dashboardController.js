@@ -9,6 +9,21 @@ angular.module('ink')
 			.success(function(data) {
 				setStories(data);
 			});
+
+		storyService.getBgImages()
+			.success(function(files) {		
+    			$scope.bgImages = files;
+    			$scope.bgImages.push('');
+					$scope.bgImages = $scope.bgImages.sort();
+			});
+
+		storyService.getModifierImages()
+			.success(function(files) {
+				alert(files);
+    			$scope.modifierImages = files;
+    			$scope.modifierImages.push('');
+					$scope.modifierImages = $scope.modifierImages.sort();
+			});
   }
 
   // =============================================
@@ -183,37 +198,9 @@ angular.module('ink')
   };
 
 	// =================================================
-	// File upload
+	// Load available background / modifier images
 	// =================================================
-	$scope.uploadBackgroundImage = function(elem)
-	{
-		alert(elem);
-	};
+  
 
-
-
-	$scope.onFileSelect = function($files) {
-		alert("x");
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      alert(file);
-      $scope.upload = $upload.upload({
-        url: '/api/upload/background', //upload.php script, node.js route, or servlet url
-        // method: 'POST' or 'PUT',
-        // headers: {'header-key': 'header-value'},
-        // withCredentials: true,
-        data: {myObj: $scope.myModelObj},
-        file: file, // or list of files: $files for html5 only
-        // fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file
-    /* customize file formData name ('Content-Desposition'), server side file variable name. 
-        Default is 'file' */
-        //fileFormDataName: myFile, //or a list of names for multiple files (html5).
-        /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
-        //formDataAppender: function(formData, key, val){}
-      }).success(function(data, status, headers, config) {
-
-      });
-    }
-  };  
 
 });

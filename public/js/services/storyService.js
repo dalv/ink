@@ -21,6 +21,12 @@ angular.module('ink')
 			},
 			createOption : function(story) {
 				return $http.put('/api/stories/newOption', story);
-			}
+			},
+			getBgImages : function() {
+				return $http.get('/api/bgimages/');
+			},
+			getModifierImages : function() {
+				return $http.get('/api/modifierimages/');
+			}		
 		}
 	});

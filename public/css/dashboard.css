@@ -101,3 +101,9 @@ pre {
 .editable-wrap .editable-controls, .editable-wrap .editable-controls>textarea{
 	height:200px;
 }
+
+.imgBackground, .imgModifier
+{
+	width:100px;
+	height:100px;
+}

@@ -1,4 +1,5 @@
 var api = require('./api');
+var path = require('path');
 
 module.exports = function(app) {
 
@@ -8,12 +9,12 @@ module.exports = function(app) {
 	
 	// Home route
 	app.get('/', function(req, res) {
-		res.sendfile('./public/index.html');
+		res.sendFile(path.join(__dirname, '../public', 'index.html'));
 	});
 
 	// Dashboard
 	app.get('/dashboard', function(req, res) {
-		res.sendfile('./public/dashboard.html');
+		res.sendFile(path.join(__dirname, '../public', 'dashboard.html'));
 	});
 
 	// ==============================================
@@ -38,7 +39,7 @@ module.exports = function(app) {
 	// Delete story
 	app.delete('/api/stories/:story_id', api.delete);	
 
-		// Upload files
-	app.post('/api/upload/modifier', api.uploadModifier);	
-	app.post('/api/upload/background', api.uploadBackground);	
+	// Get image file list
+	app.get('/api/bgimages', api.getBgImgList);	
+	app.get('/api/modifierimages', api.getModifierImgList);	
 }

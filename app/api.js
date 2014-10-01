@@ -1,7 +1,11 @@
 (function(api){
 
+  var fs = require('fs');
+  var path = require('path');
 	var StoryModel = require('./models/storyModel').StoryModel;
 	var OptionModel = require('./models/storyModel').OptionModel;	
+
+  var imgFolder =  __dirname + '../../public/img/';
 
 	// =============================================
 	// Return all story objects
@@ -114,18 +118,23 @@
 	}
 
 	// =============================================
-	// Add new option to story object by id
-	// =============================================  
-	api.uploadModifier = function(req, res) {
-		console.log("attempting to upload modifier");
-	}
+	// Get backgorund image list
+	// =============================================
+	 
+	api.getBgImgList = function(req, res) {
+		fs.readdir(imgFolder + 'backgrounds/', function(err, files){
+			res.send(files);
+		});
+	};
 
 	// =============================================
-	// Add new option to story object by id
+	// Get modifier image list
 	// =============================================  
-	api.uploadBackground = function(req, res) {
-		console.log("attempting to upload bg");
-	}
+	api.getModifierImgList = function(req, res) {
+		fs.readdir(imgFolder + 'modifiers/', function(err, files){
+			res.send(files);
+		});
+	};
 
 
 })(module.exports);

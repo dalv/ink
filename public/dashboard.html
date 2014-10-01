@@ -91,6 +91,17 @@
 						<div class="modifierDesc" editable-textarea="story.modifier_desc" onaftersave="updateStory(story)"> 
 							<pre>{{story.modifier_desc || 'Modifier description'}}</pre>
 						</div>					
+				  	<table> <tr><td>
+				  		<div>Modifier image: </div>	</td><td>
+				  		<div buttons="no" editable-select="story.modifier_img"
+				  			e-ng-options="img as img for img in modifierImages" onaftersave="updateStory(story)"> 
+			  				{{story.modifier_img || '-- none --'}} 
+		  				</div> </td></tr>
+	  					<tr><td>
+	  						<img class="imgModifier" ng-show="story.modifier_img!=''" ng-src="img/modifiers/{{story.modifier_img}}"/>
+	  					</td></tr>
+  					</table>	
+
 					</div>
 
 					<!-- --> <hr/> <!-- -->	
@@ -145,9 +156,15 @@
 					<!-- ================ -->	
 					<!-- Background image -->
 					<!-- ================ -->	
-					<div>Background </div>	
-					<input type="file" ng-model="background_image" onchange="angular.element(this).scope().uploadBackgroundImage(this)" >
-
+					<table> <tr><td>
+						<div>Background image: </div>	</td><td>
+						<div buttons="no" editable-select="story.bg_img"
+							e-ng-options="img as img for img in bgImages" onaftersave="updateStory(story)"> 
+							{{story.bg_img || '-- none --'}} 
+						</div> </td></tr>
+						<tr><td><img class="imgBackground" ng-show="story.bg_img!=''" ng-src="img/backgrounds/{{story.bg_img}}"/></td></tr>
+					</table>	
+			    
 				</div>
 			</div>
 
