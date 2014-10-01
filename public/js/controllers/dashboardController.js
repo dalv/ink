@@ -19,7 +19,6 @@ angular.module('ink')
 
 		storyService.getModifierImages()
 			.success(function(files) {
-				alert(files);
     			$scope.modifierImages = files;
     			$scope.modifierImages.push('');
 					$scope.modifierImages = $scope.modifierImages.sort();
