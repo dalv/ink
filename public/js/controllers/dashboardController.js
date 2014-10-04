@@ -29,7 +29,7 @@ angular.module('ink')
 					$scope.bgImages = $scope.bgImages.sort();
 			})
 			.error(function(err){
-				//alert(err);
+				alert(err);
 			});
 
 
