@@ -21,7 +21,7 @@ angular.module('ink')
 				alert("Error retrieving test data: " + err);
 			});
 
-
+/*
 		// Get list of backgorund images
 		storyService.getBgImages()
 			.success(function(files) {	
@@ -42,7 +42,7 @@ angular.module('ink')
 					$scope.modifierImages = $scope.modifierImages.sort();
 			});
   }
-
+*/
   // =============================================
 	// Do this when first firing up the controller
 	// =============================================  
