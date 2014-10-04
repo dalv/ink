@@ -10,13 +10,19 @@ angular.module('ink')
 				setStories(data);
 			});
 
+		// Get list of backgorund images
 		storyService.getBgImages()
-			.success(function(files) {		
+			.success(function(files) {	
+					alert(files);	
     			$scope.bgImages = files;
     			$scope.bgImages.push('');
 					$scope.bgImages = $scope.bgImages.sort();
 			});
 
+
+
+
+		// Get list of Modifier images
 		storyService.getModifierImages()
 			.success(function(files) {
     			$scope.modifierImages = files;

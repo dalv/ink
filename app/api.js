@@ -123,7 +123,10 @@
 	 
 	api.getBgImgList = function(req, res) {
 		fs.readdir(imgFolder + 'backgrounds/', function(err, files){
-			res.send(files);
+			if (err)
+				res.rend(err)
+			else
+				res.send(files);
 		});
 	};
 
@@ -132,7 +135,10 @@
 	// =============================================  
 	api.getModifierImgList = function(req, res) {
 		fs.readdir(imgFolder + 'modifiers/', function(err, files){
-			res.send(files);
+			if (err)
+				res.rend(err)
+			else
+				res.send(files);
 		});
 	};
 
