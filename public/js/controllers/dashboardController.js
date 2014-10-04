@@ -16,6 +16,9 @@ angular.module('ink')
 		storyService.getTest()
 			.success(function(data) {
 				alert(data);
+			})
+			.error(function(err){
+				alert("Error retrieving test data: " + err);
 			});
 
 		// Get list of backgorund images
