@@ -15,7 +15,7 @@ angular.module('ink')
 
 		storyService.getTest()
 			.success(function(data) {
-				alert(data);
+				alert("Test data: " + data);
 			})
 			.error(function(err){
 				alert("Error retrieving test data: " + err);
