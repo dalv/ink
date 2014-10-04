@@ -17,6 +17,9 @@ angular.module('ink')
     			$scope.bgImages = files;
     			$scope.bgImages.push('');
 					$scope.bgImages = $scope.bgImages.sort();
+			})
+			.error(function(err){
+				alert(err);
 			});
 
 
