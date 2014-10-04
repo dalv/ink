@@ -11,7 +11,7 @@
 	// Test method for various stuff
 	// =============================================  
 	api.getTest = function(req, res) {
-		res.rend(__dirname);
+		res.send(__dirname);
 	};  
 
 	// =============================================
