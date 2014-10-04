@@ -5,13 +5,14 @@
 	var StoryModel = require('./models/storyModel').StoryModel;
 	var OptionModel = require('./models/storyModel').OptionModel;	
 
-  var imgFolder =  __dirname + '../../public/img/';
+  //var imgFolder =  __dirname + '../../public/img/';
+  var imgFolder =  process.cwd() + "/img/";
 
 	// =============================================
 	// Test method for various stuff
 	// =============================================  
 	api.getTest = function(req, res) {
-		res.send(__dirname);
+		res.send(process.cwd());
 	};  
 
 	// =============================================
@@ -131,7 +132,7 @@
 	api.getBgImgList = function(req, res) {
 		fs.readdir(imgFolder + 'backgrounds/', function(err, files){
 			if (err)
-				res.rend(err)
+				res.send(err)
 			else
 				res.send(files);
 		});
@@ -143,7 +144,7 @@
 	api.getModifierImgList = function(req, res) {
 		fs.readdir(imgFolder + 'modifiers/', function(err, files){
 			if (err)
-				res.rend(err)
+				res.send(err)
 			else
 				res.send(files);
 		});

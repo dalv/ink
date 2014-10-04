@@ -10,6 +10,7 @@ var database = require('./config/database');
 // Configuration 
 mongoose.connect(database.url);
 app.use(express.static(__dirname + '/public'));
+//app.use('/static', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

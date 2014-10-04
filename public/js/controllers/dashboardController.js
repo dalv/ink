@@ -13,14 +13,14 @@ angular.module('ink')
 				alert(err);
 			});
 
-/*		storyService.getTest()
+		storyService.getTest()
 			.success(function(data) {
 				alert(data);
 			})
 			.error(function(err){
 				alert("Error retrieving test data: " + err);
 			});
-*/
+
 
 		// Get list of backgorund images
 		storyService.getBgImages()
@@ -30,7 +30,7 @@ angular.module('ink')
 					$scope.bgImages = $scope.bgImages.sort();
 			})
 			.error(function(err){
-				alert(err);
+				//alert(err);
 			});
 
 
