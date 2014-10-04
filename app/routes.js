@@ -21,6 +21,9 @@ module.exports = function(app) {
 	// API
 	// ==============================================
 
+	// Get test value
+	app.get('/api/test', api.getTest);
+
 	// Get all stories
 	app.get('/api/stories', api.getAll);
 

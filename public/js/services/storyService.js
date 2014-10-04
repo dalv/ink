@@ -4,6 +4,9 @@ angular.module('ink')
 	// each function returns a promise object 
 	.factory('storyService', function($http) {
 		return {
+			getTest : function() {
+				return $http.get('/api/test/');
+			},
 			getAll : function() {
 				return $http.get('/api/stories/');
 			},

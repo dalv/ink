@@ -8,12 +8,19 @@ angular.module('ink')
 		storyService.getAll()
 			.success(function(data) {
 				setStories(data);
+			})
+			.error(function(err){
+				alert(err);
+			});
+
+		storyService.getTest()
+			.success(function(data) {
+				alert(data);
 			});
 
 		// Get list of backgorund images
 		storyService.getBgImages()
 			.success(function(files) {	
-					alert(files);	
     			$scope.bgImages = files;
     			$scope.bgImages.push('');
 					$scope.bgImages = $scope.bgImages.sort();
@@ -21,8 +28,6 @@ angular.module('ink')
 			.error(function(err){
 				alert(err);
 			});
-
-
 
 
 		// Get list of Modifier images

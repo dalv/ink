@@ -8,6 +8,13 @@
   var imgFolder =  __dirname + '../../public/img/';
 
 	// =============================================
+	// Test method for various stuff
+	// =============================================  
+	api.getTest = function(req, res) {
+		res.rend(__dirname);
+	};  
+
+	// =============================================
 	// Return all story objects
 	// =============================================  
 	api.getAll = function(req, res) {
