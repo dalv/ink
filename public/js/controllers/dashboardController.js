@@ -41,8 +41,9 @@ angular.module('ink')
     			$scope.modifierImages.push('');
 					$scope.modifierImages = $scope.modifierImages.sort();
 			});
-  }
 */
+}
+
   // =============================================
 	// Do this when first firing up the controller
 	// =============================================  

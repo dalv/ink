@@ -6,7 +6,7 @@
 	var OptionModel = require('./models/storyModel').OptionModel;	
 
   //var imgFolder =  __dirname + '../../public/img/';
-  var imgFolder =  process.cwd() + "/img/";
+  var imgFolder =  process.cwd() + "img/";
 
 	// =============================================
 	// Test method for various stuff
