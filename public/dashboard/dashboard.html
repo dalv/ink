@@ -102,7 +102,7 @@
 			  				{{story.modifier_img || '-- none --'}} 
 		  				</div> </td></tr>
 	  					<tr><td>
-	  						<img class="imgModifier" ng-show="story.modifier_img!=''" ng-src="img/modifiers/{{story.modifier_img}}"/>
+	  						<img class="imgModifier" ng-show="story.modifier_img!=''" ng-src="../img/modifiers/{{story.modifier_img}}"/>
 	  					</td></tr>
   					</table>	
 
@@ -166,7 +166,7 @@
 							e-ng-options="img as img for img in bgImages" onaftersave="updateStory(story)"> 
 							{{story.bg_img || '-- none --'}} 
 						</div> </td></tr>
-						<tr><td><img class="imgBackground" ng-show="story.bg_img!=''" ng-src="img/backgrounds/{{story.bg_img}}"/></td></tr>
+						<tr><td><img class="imgBackground" ng-show="story.bg_img!=''" ng-src="../img/backgrounds/{{story.bg_img}}"/></td></tr>
 					</table>	
 			    
 				</div>
