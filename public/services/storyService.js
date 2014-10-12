@@ -1,7 +1,6 @@
 angular.module('ink')
-
-	// super simple service
-	// each function returns a promise object 
+	// Angular service for calling nodejs server methods
+	// This is the single communication point between the front-end and back-end
 	.factory('storyService', function($http) {
 		return {
 			getTest : function() {

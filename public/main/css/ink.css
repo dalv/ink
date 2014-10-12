@@ -1,0 +1,12 @@
+body {
+   background-color:#e5e5e5;
+   color:#666;
+   font:normal 13px Roboto,arial,sans-serif;
+   padding:0px;
+}
+
+.container{
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+}

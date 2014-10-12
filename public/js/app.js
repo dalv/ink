@@ -1,1 +1,0 @@
-var appDashboard = angular.module('ink', ['xeditable']);

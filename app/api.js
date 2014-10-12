@@ -9,13 +9,6 @@
   var imgFolder =  process.cwd() + "/public/img/";
 
 	// =============================================
-	// Test method for various stuff
-	// =============================================  
-	api.getTest = function(req, res) {
-		res.send(process.cwd());
-	};  
-
-	// =============================================
 	// Return all story objects
 	// =============================================  
 	api.getAll = function(req, res) {
@@ -30,15 +23,32 @@
 	};
 
 	// =============================================
-	// Return story object by id
+	// Return story object by id OR first if no id supplied
 	// =============================================  
 	api.getOne = function(req, res) {
-		StoryModel.findOne({_id: req.params.story_id}, function(err, story) {
-			if (err)
-				res.send(err)
-			else
-				res.send(story);
-		});
+
+		var storyId = req.params.story_id;
+
+		if(storyId == "undefined" || storyId == "")
+		{
+			StoryModel.findOne()
+	  						.sort({date: 'asc'})
+	  						.exec(function(err, story) {	
+				if (err)
+					res.send(err)
+				else
+					res.json(story);
+			});		
+		}
+		else
+		{
+			StoryModel.findOne({_id: storyId}, function(err, story) {
+				if (err)
+					res.send(err)
+				else
+					res.send(story);
+			});
+		}
 	};
 
 	// =============================================
@@ -150,5 +160,11 @@
 		});
 	};
 
+	// =============================================
+	// Test method for various stuff
+	// =============================================  
+	api.getTest = function(req, res) {
+		res.send(process.cwd());
+	};  
 
 })(module.exports);

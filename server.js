@@ -21,4 +21,9 @@ var server = http.createServer(app);
 var port = process.env.PORT || 8080;
 server.listen(port);
 
-console.log("Listening on port " + port + "...")
+var now = new Date(); 
+var timestamp = now.getHours() + ":" + 
+								now.getMinutes() + ":" + 
+								now.getSeconds();
+
+console.log(timestamp + " Listening on port " + port + "...")
