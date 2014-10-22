@@ -115,21 +115,14 @@
 		StoryModel.findOne({_id: req.body._id}, function(err, story) {
 			if (err)
 				res.send(err)
-			else {
-				OptionModel.create({}, 
-					function(err, opt) {
+            else {
+                var opt = new OptionModel();
+                story.opts.push(opt);
+				story.save(function(err) {
 					if (err)
 						res.send(err);
 					else
-					{
-						story.opts.push(opt);
-						story.save(function(err) {
-							if (err)
-								res.send(err);
-							else
-								api.getAll(req, res);
-						});
-					}
+                        api.getAll(req, res);
 				});				
 			}
 		});
