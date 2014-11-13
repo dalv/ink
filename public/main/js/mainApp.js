@@ -1,1 +1,1 @@
-var app = angular.module('ink', []);
+var app = angular.module('ink', ['dataAccess']);

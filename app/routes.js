@@ -15,7 +15,8 @@ module.exports = function(app) {
 	// Dashboard
 	app.get('/dashboard', function(req, res) {
 		res.sendFile(path.join(__dirname, '../public/dashboard', 'dashboard.html'));
-	});
+    });
+    
 
 	// ==============================================
 	// API

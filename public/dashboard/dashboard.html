@@ -1,27 +1,29 @@
 <!doctype html>
 
-<html ng-app="ink">
+<html ng-app="dashboard">
 <head>
 	<title>Admin Dashboard</title>
 
   <!-- Styles -->
 	<link href="lib/angular-xeditable-0.1.8/css/xeditable.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="./css/dashboard.css" />
 
-  <!-- Libs: jquery, angular and x-editable -->
+  <!-- Libs: jquery, angular, bootstrap and x-editable -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
 
   <!-- App: controler and service -->
 	<script src="js/dashboardApp.js"></script>
 	<script src="js/dashboardController.js"></script>
-	<script src="../services/storyService.js"></script>
+	<script src="../services/dataAccess.js"></script>
 
 </head>
 
 <body ng-controller="dashboardController">
-	<div class="wrapper">
+	<div class="container">
 
 		<div id="top">
 			<div id="title">Admin dashboard</div>
@@ -32,7 +34,7 @@
 		</div>
 
 		<div id="stories">
-			<div class ="storyCard" ng-repeat="story in stories">
+			<div class ="storyCard" ng-repeat="story in filteredStories">
 
 				<!-- ============== -->	
 				<!-- COLLAPSED CARD -->				
@@ -172,8 +174,11 @@
 				</div>
 			</div>
 
-			<!-- New story -->	
+		  <!-- New story -->	
 			<div class ="storyCard"> <button ng-click="createStory()"> New Story </button> </div>
+
+			<!-- Pagination controls -->	
+		  <pagination direction-links="false" boundary-links="true" total-items="stories.length" items-per-page="numPerPage" ng-model="currentPage"></pagination>
 
 		</div>
 

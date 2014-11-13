@@ -12,11 +12,9 @@ pre {
 #top {
 	text-align:center;
 	padding:15px;
- 	width:90%;
  	background:#FFF;
   border:1px solid #AAA;
   border-bottom:2px solid #BBB;
-  margin:0px auto 25px auto;
   font-size:14;
   font-weight:bold;
 }
@@ -28,11 +26,10 @@ pre {
 .storyCard {
 	text-align:left;
 	padding:6px;
-	width:80%;
   background:#FFF;
   border:1px solid #AAA;
   border-bottom:2px solid #BBB;
-  margin:15px auto;
+  margin-top:15px;
 }
 
 .storyPreview, .storyBarTop {

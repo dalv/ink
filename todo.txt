@@ -1,0 +1,11 @@
+Main App:
+- Get the main page going: story, inventory, options
+- Cookie save user progress
+- Breadcrumb save
+
+Dashboard:
+- Dashboard page sometimes jumps to the top after an edit - fix this
+- Would be nice to have pagination on dashboard page: show 10/20/30 items at one time with "next" "prev" buttons
+- We need some loading animation for when angular does data binding - for both dashboard and main app - right now it just seems frozen
+X Deleted options are not getting deleted form the db - orphaned options ar piling up
+- Exhaustible needs to be aware of which options are gone and show new options accordingly

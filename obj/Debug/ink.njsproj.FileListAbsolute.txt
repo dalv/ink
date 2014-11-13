@@ -1,0 +1,2 @@
+D:\Work\web\ink\obj\Debug\ink.njsprojResolveAssemblyReference.cache
+D:\Work\web\ink\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,1 +1,1 @@
-var app = angular.module('ink', ['xeditable']);
+var app = angular.module('dashboard', ['dataAccess', 'xeditable', 'ui.bootstrap']);
