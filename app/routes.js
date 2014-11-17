@@ -46,4 +46,7 @@ module.exports = function(app) {
 	// Get image file list
 	app.get('/api/bgimages', api.getBgImgList);	
 	app.get('/api/modifierimages', api.getModifierImgList);	
+
+	// Get risk levels
+	app.get('/api/riskLevels', api.getRiskLevels);	
 }

@@ -4,6 +4,7 @@
   var path = require('path');
 	var StoryModel = require('./models/storyModel').StoryModel;
 	var OptionModel = require('./models/storyModel').OptionModel;	
+	var RiskLevelModel = require('./models/riskLevelModel').RiskLevelModel;	
 
   //var imgFolder =  __dirname + '../../public/img/';
   var imgFolder =  process.cwd() + "/public/img/";
@@ -17,8 +18,32 @@
   						.exec(function(err, stories) {	
 			if (err)
 				res.send(err)
-			else
+			else {
+				// Attach some extra properties to story objects
+				var storyNumber = 1;
+
+				stories.forEach(function(s){
+
+					// Story number
+					s.number = storyNumber;
+					storyNumber = storyNumber + 1;
+
+					// Story preview
+					var storyPreview = "";
+					if(s.text != undefined) {
+						var txtArray = s.text.split(" ");
+
+						if(txtArray.length >= 3)
+							storyPreview = s.number + ". " + txtArray[0] + " " + txtArray[1] + " " + txtArray[2] + " ...";
+						else
+							storyPreview = s.number + ". " + s.text;
+					}
+					s.preview = storyPreview;
+				});		
+
+				// return stories	
 				res.json(stories);
+			}
 		});
 	};
 
@@ -122,7 +147,7 @@
 					if (err)
 						res.send(err);
 					else
-                        api.getAll(req, res);
+            api.getAll(req, res);
 				});				
 			}
 		});
@@ -130,8 +155,7 @@
 
 	// =============================================
 	// Get backgorund image list
-	// =============================================
-	 
+	// ============================================= 
 	api.getBgImgList = function(req, res) {
 		fs.readdir(imgFolder + 'backgrounds/', function(err, files){
 			if (err)
@@ -150,6 +174,19 @@
 				res.send(err)
 			else
 				res.send(files);
+		});
+	};
+
+	// =============================================
+	// Get risk levels
+	// =============================================  
+	api.getRiskLevels = function(req, res) {
+		RiskLevelModel.find({}, function(err, riskLevels) {	
+			if (err)
+				res.send(err)
+			else
+				console.log(riskLevels);
+				res.json(riskLevels);
 		});
 	};
 

@@ -1,1 +1,1 @@
-var app = angular.module('dashboard', ['dataAccess', 'xeditable', 'ui.bootstrap']);
+var app = angular.module('dashboard', ['dataAccess', 'storyUtils', 'xeditable', 'ui.bootstrap']);

@@ -15,49 +15,44 @@
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
 
-  <!-- App: controler and service -->
+  <!-- App: controler and services -->
 	<script src="js/dashboardApp.js"></script>
 	<script src="js/dashboardController.js"></script>
 	<script src="../services/dataAccess.js"></script>
+	<script src="../services/storyUtils.js"></script>
 
 </head>
 
 <body ng-controller="dashboardController">
 	<div class="container">
-
+		
 		<div id="top">
 			<div id="title">Admin dashboard</div>
-			<div id="top-controls">
-				<button ng-click="expandAll(true)">expand all</button>
-				<button ng-click="expandAll(false)">collapse all</button>
-			</div>
 		</div>
 
 		<div id="stories">
-			<div class ="storyCard" ng-repeat="story in filteredStories">
+			<div class ="storyCard" ng-repeat="card in filteredCards">
 
 				<!-- ============== -->	
 				<!-- COLLAPSED CARD -->				
 				<!-- ============== -->	
-				<div class="storyPreview" ng-show="!story.isExpanded" ng-click="story.isExpanded=true"> 
-					<!--<pre>{{story.number}}. {{story.text}}</pre>-->	
-					<!--{{getPreviewById(story._id)}}-->
-					{{getPreviewById(story._id)}}
+				<div class="storyPreview" ng-show="!card.isExpanded" ng-click="card.isExpanded=true"> 
+					{{card.story.preview}} 
 				</div>
 
 				<!-- ============= -->	
 				<!-- EXPANDED CARD -->		
 				<!-- ============= -->	
-				<div class="storyContent" ng-show="story.isExpanded">	
-					<div class="storyBarTop" ng-click="story.isExpanded=false">
-						<button class="buttonDeleteStory" ng-click="deleteStory(story)" title="Delete Story"> x </button>
+				<div class="storyContent" ng-show="card.isExpanded">	
+					<div class="storyBarTop" ng-click="card.isExpanded=false">
+						<button class="buttonDeleteStory" ng-click="deleteStory(card.story)" title="Delete Story"> x </button>
 					</div>
 
 					<!-- ========== -->	
 					<!-- Story Text -->
 					<!-- ========== -->	
-					<div class="storyText" editable-textarea="story.text" onaftersave="updateStory(story)"> 
-						<pre>{{story.number}}. {{story.text || 'Story text'}}</pre>
+					<div class="storyText" editable-textarea="card.story.text" onaftersave="updateStory(card.story)"> 
+						<pre>{{card.story.number}}. {{card.story.text || 'Story text'}}</pre>
 					</div>
 
 					<!-- --> <hr/> <!-- -->
@@ -66,45 +61,49 @@
 					<!-- Story Options -->
 					<!-- ============= -->	
 					<table class = "storyOptions">
-						<tr ng-repeat="option in story.opts"> 
+						<tr ng-repeat="option in card.story.opts"> 
 							<td>
-								<button ng-click="deleteOption(story, option)" title="Delete Option"> x </button>
+								<button ng-click="deleteOption(card.story, option)" title="Delete Option"> x </button>
 							<td> 
-								<div class="storyOption" editable-text="option.text" onaftersave="updateStory(story)"> {{option.text || 'Option text'}} </div>
+								<div class="storyOption" editable-text="option.text" onaftersave="updateStory(card.story)"> 
+									{{option.text || 'Option text'}} 
+								</div>
 							</td> 
 							<td>
 								<div class="storyOptionNext" buttons="no" editable-select="option.next"
-									e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-									{{getPreviewById(option.next) || 'Select outcome'}} 
+									e-ng-options="c.story._id as c.story.preview for c in cards" onaftersave="updateStory(card.story)"> 
+									{{getStoryPreviewById(option.next) || 'Select outcome'}} 
 								</div>	
 							</td>
 						</tr>
 					</table>
 
-					<button ng-click="createOption(story)"> New Option </button>
+					<button ng-click="createOption(card.story)"> New Option </button>
 
 					<!-- --> <hr/> <!-- -->	
 
 					<!-- ======== -->	
 					<!-- Modifier -->
 					<!-- ======== -->	
-					<input class="storyModifier" type="checkbox" ng-model="story.modifier" ng-change="updateStory(story)">Modifier</input>
 
-					<div ng-show="story.modifier"> 
-						<div class="modifierText" editable-text="story.modifier_text" onaftersave="updateStory(story)"> 
-							{{story.modifier_text || 'Modifier text'}} 
+					<input class="storyModifier" type="checkbox" ng-model="card.story.modifier" ng-change="updateStory(card.story)">Modifier</input>
+
+					<div ng-show="card.story.modifier"> 
+						<div class="modifierText" editable-text="card.story.modifier_text" onaftersave="updateStory(card.story)"> 
+							{{card.story.modifier_text || 'Modifier text'}} 
 						</div>
-						<div class="modifierDesc" editable-textarea="story.modifier_desc" onaftersave="updateStory(story)"> 
-							<pre>{{story.modifier_desc || 'Modifier description'}}</pre>
+						<div class="modifierDesc" editable-textarea="card.story.modifier_desc" onaftersave="updateStory(card.story)"> 
+							<pre>{{card.story.modifier_desc || 'Modifier description'}}</pre>
 						</div>					
 				  	<table> <tr><td>
 				  		<div>Modifier image: </div>	</td><td>
-				  		<div buttons="no" editable-select="story.modifier_img"
-				  			e-ng-options="img as img for img in modifierImages" onaftersave="updateStory(story)"> 
-			  				{{story.modifier_img || '-- none --'}} 
+				  		<div buttons="no" editable-select="card.story.modifier_img"
+				  			e-ng-options="img as img for img in modifierImages" onaftersave="updateStory(card.story)"> 
+			  				{{card.story.modifier_img || '-- none --'}} 
 		  				</div> </td></tr>
 	  					<tr><td>
-	  						<img class="imgModifier" ng-show="story.modifier_img!=''" ng-src="../img/modifiers/{{story.modifier_img}}"/>
+	  						<img class="imgModifier" ng-show="card.story.modifier_img!=''" 
+	  							ng-src="{{card.story.modifier_img!='' && '../img/modifiers/' + card.story.modifier_img || ''}}"/>
 	  					</td></tr>
   					</table>	
 
@@ -115,15 +114,15 @@
 					<!-- ======== -->	
 					<!-- Redirect -->
 					<!-- ======== -->	
-					<input class="storyRedirect" type="checkbox" ng-model="story.redirect" ng-change="updateStory(story)">Redirect</input>
+					<input class="storyRedirect" type="checkbox" ng-model="card.story.redirect" ng-change="updateStory(card.story)">Redirect</input>
 
-					<table ng-show="story.redirect"> <tr><td>
-						<div class="redirectSeconds" editable-text="story.redirect_seconds" onaftersave="updateStory(story)"> 
-							Redirect after {{story.redirect_seconds || 'undefined'}} seconds to
+					<table ng-show="card.story.redirect"> <tr><td>
+						<div class="redirectSeconds" editable-text="card.story.redirect_seconds" onaftersave="updateStory(card.story)"> 
+							Redirect after {{card.story.redirect_seconds || 'undefined'}} seconds to
 						</div> </td><td>
-						<div class="storyOptionNext" buttons="no" editable-select="story.redirect_to"
-							e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-							{{getPreviewById(story.redirect_to) || 'Select outcome'}} 
+						<div class="storyOptionNext" buttons="no" editable-select="card.story.redirect_to"
+							e-ng-options="c.story._id as c.story.preview for c in cards" onaftersave="updateStory(card.story)"> 
+							{{getStoryPreviewById(card.story.redirect_to) || 'Select outcome'}} 
 						</div> </td></tr>
 					</table>		
 
@@ -132,15 +131,15 @@
 					<!-- =========== -->	
 					<!-- Exhaustable -->
 					<!-- =========== -->	
-					<input class="storyExhaustable" type="checkbox" ng-model="story.exhaustable" ng-change="updateStory(story)">Exhaustable</input>
+					<input class="storyExhaustable" type="checkbox" ng-model="card.story.exhaustable" ng-change="updateStory(card.story)">Exhaustable</input>
 
-					<table ng-show="story.exhaustable"> <tr><td>
-						<div class="exhaustableNewOption" editable-text="story.exhaustable_opt_text" onaftersave="updateStory(story)"> 
-							{{story.exhaustable_opt_text || 'New option text'}} 
+					<table ng-show="card.story.exhaustable"> <tr><td>
+						<div class="exhaustableNewOption" editable-text="card.story.exhaustable_opt_text" onaftersave="updateStory(card.story)"> 
+							{{card.story.exhaustable_opt_text || 'New option text'}} 
 						</div> </td><td>
-						<div class="storyOptionNext" buttons="no" editable-select="story.exhaustable_opt_next"
-							e-ng-options="s._id as s.preview for s in stories" onaftersave="updateStory(story)"> 
-							{{getPreviewById(story.exhaustable_opt_next) || 'Select outcome'}} 
+						<div class="storyOptionNext" buttons="no" editable-select="card.story.exhaustable_opt_next"
+							e-ng-options="c.story._id as c.story.preview for c in cards" onaftersave="updateStory(card.story)"> 
+							{{getStoryPreviewById(card.story.exhaustable_opt_next) || 'Select outcome'}} 
 						</div> </td></tr>
 					</table>	
 
@@ -151,9 +150,9 @@
 					<!-- ========== -->	
 					<table> <tr><td>
 						<div>Risk level: </div>	</td><td>
-						<div class="riskLevel" buttons="no" editable-select="story.risk_level"
-							e-ng-options="level.value as level.text for level in riskLevels" onaftersave="updateStory(story)"> 
-							{{getRiskLevel(story.risk_level) || 'undefined'}} 
+						<div class="riskLevel" buttons="no" editable-select="card.story.risk_level"
+							e-ng-options="level.value as level.text for level in riskLevels" onaftersave="updateStory(card.story)"> 
+							{{getRiskLevelText(card.story.risk_level) || 'undefined'}} 
 						</div> </td></tr>
 					</table>	
 
@@ -164,11 +163,12 @@
 					<!-- ================ -->	
 					<table> <tr><td>
 						<div>Background image: </div>	</td><td>
-						<div buttons="no" editable-select="story.bg_img"
-							e-ng-options="img as img for img in bgImages" onaftersave="updateStory(story)"> 
-							{{story.bg_img || '-- none --'}} 
+						<div buttons="no" editable-select="card.story.bg_img"
+							e-ng-options="img as img for img in bgImages" onaftersave="updateStory(card.story)"> 
+							{{card.story.bg_img || '-- none --'}} 
 						</div> </td></tr>
-						<tr><td><img class="imgBackground" ng-show="story.bg_img!=''" ng-src="../img/backgrounds/{{story.bg_img}}"/></td></tr>
+						<tr><td><img class="imgBackground" ng-show="card.story.bg_img!=''" 
+	  							ng-src="{{card.story.bg_img!='' && '../img/backgrounds/' + card.story.bg_img || ''}}"/>
 					</table>	
 			    
 				</div>
@@ -178,7 +178,7 @@
 			<div class ="storyCard"> <button ng-click="createStory()"> New Story </button> </div>
 
 			<!-- Pagination controls -->	
-		  <pagination direction-links="false" boundary-links="true" total-items="stories.length" items-per-page="numPerPage" ng-model="currentPage"></pagination>
+		  <pagination direction-links="false" boundary-links="true" total-items="cards.length" items-per-page="numPerPage" ng-model="currentPage"></pagination>
 
 		</div>
 

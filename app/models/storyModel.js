@@ -7,6 +7,8 @@ var OptionSchema = new mongoose.Schema({
 
 var StorySchema = new mongoose.Schema({
 		text : 								{ type: String, default : "" },
+		number : 							{ type: Number, default : 0 },
+		preview : 						{ type: String, default : "" },
 		date: 								{ type: Date, default: Date.now },
 		opts : 								[OptionSchema],
 		bg_img: 							{ type: String, default : "" },
@@ -21,7 +23,7 @@ var StorySchema = new mongoose.Schema({
 		exhaustable_opt_text: { type: String, default : "" },	
 		exhaustable_opt_next: { type: mongoose.Schema.Types.ObjectId, default : new mongoose.Types.ObjectId() },
 		risk_level: 					{ type: Number, default : 0 }	
-	});
+	}, { collection: 'stories' });
 
 module.exports.OptionModel = mongoose.model('Opt', OptionSchema);
 module.exports.StoryModel = mongoose.model('Story', StorySchema);
