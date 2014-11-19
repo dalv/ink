@@ -2,11 +2,13 @@
 
 	angular.module("dashboard").controller('dashboardController', function($scope, dataAccess, storyUtils) {
 
-    // ==================================================
-    // --------------------  On Load  -------------------
-    // ==================================================
+		$scope.cards = [];
+
+		// ==================================================
+		// --------------------  On Load  -------------------
+		// ==================================================
 		var onGetStories = function(data){ 
-			$scope.cards = storyUtils.buildCards(data, $scope.cards); 
+			$scope.cards = storyUtils.buildCards(data, $scope.cards);
 		};
 		var onGetRiskLevels = function(data){ 
 			$scope.riskLevels = data; 
@@ -30,9 +32,9 @@
 
 		onFirstLoad();
 
-    // ==================================================
-    // --------------  Handle user events  --------------
-    // ==================================================
+		// ==================================================
+		// --------------  Handle user events  --------------
+		// ==================================================
 
 		// --------------------------------------------------
 		// Create story
@@ -73,45 +75,45 @@
 			}
 		};
 
-    // --------------------------------------------------
-    // Get story preview by id
-    // --------------------------------------------------
+		// --------------------------------------------------
+		// Get story preview by id
+		// --------------------------------------------------
 		$scope.getStoryPreviewById = function(storyId){
 			return storyUtils.getStoryPreviewById($scope.cards, storyId);
 		};
 
-    // --------------------------------------------------
-    // Get risk level text by value
-    // --------------------------------------------------
-	  $scope.getRiskLevelText = function(selectedValue) {
-	  	return storyUtils.getRiskLevelText($scope.riskLevels, selectedValue);
-	  };
+		// --------------------------------------------------
+		// Get risk level text by value
+		// --------------------------------------------------
+		$scope.getRiskLevelText = function(selectedValue) {
+			return storyUtils.getRiskLevelText($scope.riskLevels, selectedValue);
+		};
 
 		// --------------------------------------------------
 		// Handle pagination
 		// --------------------------------------------------
-	  $scope.currentPage = 1;
-	  $scope.numPerPage = 5;
-    var numberOfCards = Infinity; 
+		$scope.currentPage = 1;
+		$scope.numPerPage = 5;
+		var numberOfCards = Infinity; 
 
-	  $scope.$watchCollection('[currentPage, cards.length]', function() {
-	  	if ($scope.cards) {
-		    var begin = (($scope.currentPage - 1) * $scope.numPerPage);
-		    var end = begin + $scope.numPerPage;
-		    
-		    $scope.filteredCards = $scope.cards.slice(begin, end);
+		$scope.$watchCollection('[currentPage, cards]', function() {
+			if ($scope.cards) {
+				var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+				var end = begin + $scope.numPerPage;
+				
+				$scope.filteredCards = $scope.cards.slice(begin, end);
 
-		    // If new card got added, jump to last page
-		    if($scope.cards.length > numberOfCards) {
-		    	$scope.currentPage = Math.ceil($scope.cards.length / $scope.numPerPage);
-		    }
-		    numberOfCards = $scope.cards.length; 
-		   }
-	  }); 	  
+				// If new card got added, jump to last page
+				if($scope.cards.length > numberOfCards) {
+					$scope.currentPage = Math.ceil($scope.cards.length / $scope.numPerPage);
+				}
+				numberOfCards = $scope.cards.length; 
+			 }
+		}); 		
 
-  // --------------------------------------------------
-  // End of controller definition
-  // --------------------------------------------------		
+	// --------------------------------------------------
+	// End of controller definition
+	// --------------------------------------------------		
 	});
 
 }());

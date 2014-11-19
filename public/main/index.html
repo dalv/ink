@@ -8,8 +8,8 @@
  	<link rel="stylesheet" type="text/css" href="./main/css/ink.css" /> 
 
   <!-- Libs: jquery and angular -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
 
   <!-- App: controler and service -->
 	<script src="main/js/mainApp.js"></script> 
@@ -21,7 +21,12 @@
 <body ng-controller="mainController">
 	<div class="container">
 
-		<p>{{story.text}}</p>
+		<div id="story">{{story.text}}</div>
+		<div id="options">
+			<ul ng-repeat="option in story.opts">
+				<li ng-click="loadStory(option.next)">{{option.text}}</li>
+			</u>
+		</div>
 
 	</div>
 </body>

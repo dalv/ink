@@ -2,9 +2,9 @@
 
 	angular.module("ink").controller('mainController', function($scope, dataAccess) {
 
-    // --------------------------------------------------
-    // Handle scope binding
-    // --------------------------------------------------
+    // ==================================================
+    // --------------------  On Load  -------------------
+    // ==================================================
 		var onGetStory = function(data){
 			$scope.story = data;	
 		};
@@ -13,10 +13,19 @@
 			alert(err);
 		};
 
-    // --------------------------------------------------
-    // Call on load
-    // --------------------------------------------------
 		dataAccess.getStory().then(onGetStory, onDataAccessError);
+
+    // ==================================================
+    // --------------  Handle user events  --------------
+    // ==================================================
+
+		// --------------------------------------------------
+		// Load story
+		// --------------------------------------------------
+		$scope.loadStory = function(storyId){
+			dataAccess.getStory(storyId).then(onGetStory, onDataAccessError);
+		}
+
 
   // --------------------------------------------------
   // End of controller definition

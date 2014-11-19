@@ -10,8 +10,8 @@
  	<link rel="stylesheet" type="text/css" href="./css/dashboard.css" />
 
   <!-- Libs: jquery, angular, bootstrap and x-editable -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
 
@@ -51,6 +51,7 @@
 					<!-- ========== -->	
 					<!-- Story Text -->
 					<!-- ========== -->	
+					{{card.story.preview}} 
 					<div class="storyText" editable-textarea="card.story.text" onaftersave="updateStory(card.story)"> 
 						<pre>{{card.story.number}}. {{card.story.text || 'Story text'}}</pre>
 					</div>
