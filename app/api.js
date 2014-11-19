@@ -18,7 +18,7 @@
   						.exec(function(err, stories) {	
 			if (err)
 				res.send(err)
-			else {
+			else { 
 				// Attach some extra properties to story objects
 				var storyNumber = 1;
 

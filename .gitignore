@@ -36,10 +36,5 @@ Icon
 .Spotlight-V100
 .Trashes
 
-
-# VS Project files
-.sln
-.njsproj
-
 # db config
 database.js

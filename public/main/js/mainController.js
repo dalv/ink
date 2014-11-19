@@ -13,18 +13,15 @@
 			alert(err);
 		};
 
-		dataAccess.getStory().then(onGetStory, onDataAccessError);
+		$scope.loadStory = function(storyId)	{
+			dataAccess.getStory(storyId).then(onGetStory, onDataAccessError);			
+		}
+
+		$scope.loadStory();
 
     // ==================================================
     // --------------  Handle user events  --------------
     // ==================================================
-
-		// --------------------------------------------------
-		// Load story
-		// --------------------------------------------------
-		$scope.loadStory = function(storyId){
-			dataAccess.getStory(storyId).then(onGetStory, onDataAccessError);
-		}
 
 
   // --------------------------------------------------
