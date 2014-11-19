@@ -40,6 +40,3 @@ Icon
 # VS Project files
 .sln
 .njsproj
-
-# db config
-database.js
