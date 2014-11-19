@@ -94,7 +94,7 @@
 		// --------------------------------------------------
 		$scope.currentPage = 1;
 		$scope.numPerPage = 5;
-		var numberOfCards = Infinity; 
+		var numberOfCards = 0; 
 
 		$scope.$watchCollection('[currentPage, cards]', function() {
 			if ($scope.cards) {
@@ -103,7 +103,7 @@
 				
 				$scope.filteredCards = $scope.cards.slice(begin, end);
 
-				// If new card got added, jump to last page
+				// On first load, and if new card got added, jump to last page
 				if($scope.cards.length > numberOfCards) {
 					$scope.currentPage = Math.ceil($scope.cards.length / $scope.numPerPage);
 				}
