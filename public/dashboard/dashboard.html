@@ -133,15 +133,27 @@
 					<!-- =========== -->	
 					<input class="storyExhaustable" type="checkbox" ng-model="card.story.exhaustable" ng-change="updateStory(card.story)">Exhaustable</input>
 
-					<table ng-show="card.story.exhaustable"> <tr><td>
-						<div class="exhaustableNewOption" editable-text="card.story.exhaustable_opt_text" onaftersave="updateStory(card.story)"> 
-							{{card.story.exhaustable_opt_text || 'New option text'}} 
-						</div> </td><td>
-						<div class="storyOptionNext" buttons="no" editable-select="card.story.exhaustable_opt_next"
-							e-ng-options="c.story._id as c.story.preview for c in cards" onaftersave="updateStory(card.story)"> 
-							{{getStoryPreviewById(card.story.exhaustable_opt_next) || 'Select outcome'}} 
-						</div> </td></tr>
-					</table>	
+					<div ng-show="card.story.exhaustable">
+						<div class="exhaustingOptions">
+							<div>Which options, when used up, cause new option to appear:</div>
+							<table>
+								<tr ng-repeat="option in card.story.opts"><td>
+									<input class="exhaustingOption" type="checkbox" ng-model="option.exhausts_story" 
+										ng-change="updateStory(card.story)">{{option.text}}</input>
+								</td></tr>
+							</table>
+						</div>
+						<div>New option:</div>
+						<table ng-show="card.story.exhaustable"> <tr><td>						
+							<div class="exhaustableNewOption" editable-text="card.story.exhaustable_opt_text" onaftersave="updateStory(card.story)"> 
+								{{card.story.exhaustable_opt_text || 'New option text'}} 
+							</div> </td><td>
+							<div class="storyOptionNext" buttons="no" editable-select="card.story.exhaustable_opt_next"
+								e-ng-options="c.story._id as c.story.preview for c in cards" onaftersave="updateStory(card.story)"> 
+								{{getStoryPreviewById(card.story.exhaustable_opt_next) || 'Select outcome'}} 
+							</div> </td></tr>
+						</table>	
+					</div>
 
 					<!-- --> <hr/> <!-- -->	
 

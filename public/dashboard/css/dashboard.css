@@ -55,6 +55,15 @@ pre {
 	color:#aaa!important;
 }
 
+.exhaustingOptions
+{
+	margin:10px 10px 10px 0px;
+}
+
+.exhaustingOptions table
+{
+	margin-left: 10px;
+}
 /* =================== */
 /* x-editable override */
 /* =================== */

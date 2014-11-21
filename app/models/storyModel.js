@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var OptionSchema = new mongoose.Schema({
 		text: { type: String, default : "" },
-		next: { type: mongoose.Schema.Types.ObjectId, default : new mongoose.Types.ObjectId() }
+		next: { type: mongoose.Schema.Types.ObjectId, default : new mongoose.Types.ObjectId() },
+		exhausts_story: { type: Boolean, default : false }
 	});
 
 var StorySchema = new mongoose.Schema({
