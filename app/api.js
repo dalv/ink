@@ -16,8 +16,9 @@
 		StoryModel.find()
   						.sort({date: 'asc'})
   						.exec(function(err, stories) {	
-			if (err)
-				res.send(err)
+			if (err) {
+				res.send(err);
+			}
 			else { 
 				// Attach some extra properties to story objects
 				var storyNumber = 1;

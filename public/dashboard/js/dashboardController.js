@@ -20,7 +20,7 @@
 			$scope.modifierImages = data; 
 		};
 		var onDataAccessError = function(err){ 
-			alert(err); 
+			$scope.errorMessage = err.status + ": " + err.statusText + " - " +err.data; 
 		};
 
 		var onFirstLoad = function(){
