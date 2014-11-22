@@ -185,7 +185,6 @@
 			if (err)
 				res.send(err)
 			else
-				console.log(riskLevels);
 				res.json(riskLevels);
 		});
 	};
