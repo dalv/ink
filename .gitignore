@@ -38,7 +38,7 @@ Icon
 
 <<<<<<< HEAD
 # db config
-database.js
+config/database.js
 =======
 
 # VS Project files
