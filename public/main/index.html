@@ -15,17 +15,27 @@
 	<script src="main/js/mainApp.js"></script> 
 	<script src="main/js/mainController.js"></script> 
 	<script src="services/dataAccess.js"></script> 
+	<script src="services/storyUtils.js"></script> 
 
 </head>
 
 <body ng-controller="mainController">
 	<div class="container">
 
+		<!-- Story text -->
 		<div id="story">{{story.text}}</div>
+
+		<!-- Story options -->
 		<div id="options">
 			<ul ng-repeat="option in story.opts">
 				<li ng-click="loadStory(option.next)">{{option.text}}</li>
 			</u>
+		</div>
+
+		<!-- Story modifier -->
+		<div id="modifier" ng-show="story.modifier">
+			<div>{{story.modifier_text}}</div>
+			<img ng-show="story.modifier_img!=''" ng-src="{{story.modifier_img_fullpath}}"/>
 		</div>
 
 	</div>

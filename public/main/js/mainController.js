@@ -1,12 +1,12 @@
 (function() {
 
-	angular.module("ink").controller('mainController', function($scope, dataAccess) {
+	angular.module("ink").controller('mainController', function($scope, dataAccess, storyUtils) {
 
     // ==================================================
     // --------------------  On Load  -------------------
     // ==================================================
 		var onGetStory = function(data){
-			$scope.story = data;	
+			$scope.story = data;
 		};
 
 		var onDataAccessError = function(err){

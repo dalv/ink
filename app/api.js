@@ -20,29 +20,7 @@
 				res.send(err);
 			}
 			else { 
-				// Attach some extra properties to story objects
-				var storyNumber = 1;
-
-				stories.forEach(function(s){
-
-					// Story number
-					s.number = storyNumber;
-					storyNumber = storyNumber + 1;
-
-					// Story preview
-					var storyPreview = "";
-					if(s.text != undefined) {
-						var txtArray = s.text.split(" ");
-
-						if(txtArray.length >= 3)
-							storyPreview = s.number + ". " + txtArray[0] + " " + txtArray[1] + " " + txtArray[2] + " ...";
-						else
-							storyPreview = s.number + ". " + s.text;
-					}
-					s.preview = storyPreview;
-				});		
-
-				// return stories	
+				enhanceStories(stories, req);
 				res.json(stories);
 			}
 		});
@@ -63,7 +41,10 @@
 				if (err)
 					res.send(err)
 				else
+				{
+					enhanceStories(story, req);
 					res.json(story);
+				}
 			});		
 		}
 		else
@@ -72,7 +53,10 @@
 				if (err)
 					res.send(err)
 				else
-					res.send(story);
+				{
+					enhanceStories(story, req);
+					res.json(story);
+				}
 			});
 		}
 	};
@@ -142,9 +126,9 @@
 			if (err)
 				res.send(err)
             else {
-                var opt = new OptionModel();
-                story.opts.push(opt);
-				story.save(function(err) {
+              var opt = new OptionModel();
+              story.opts.push(opt);
+							story.save(function(err) {
 					if (err)
 						res.send(err);
 					else
@@ -196,5 +180,50 @@
 	api.getTest = function(req, res) {
 		res.send(process.cwd());
 	};  
+
+	var enhanceStories = function(stories, req) {
+		var urlRequest = req.protocol + '://' + req.get('host');
+		var urlModifiers = urlRequest + '/img/modifiers/';
+		var urlBackgrounds = urlRequest + '/img/backgorunds/';
+
+		// Attach some extra properties to story objects
+		if (stories.length) {
+			var storyNumber = 0;
+
+			stories.forEach(function(story){
+				storyNumber = storyNumber + 1;
+				enhanceStory(story, storyNumber, urlModifiers, urlBackgrounds);
+			});		
+		}
+		else {
+			// if stories.length is undefined, that means we only have one story object
+			enhanceStory(stories, 1, urlModifiers, urlBackgrounds);
+		}
+	}
+
+	var enhanceStory = function(story, storyNumber, urlModifiers, urlBackgrounds){
+
+			// Story number
+			story.number = storyNumber;
+
+			// Story preview
+			var storyPreview = "";
+			if(story.text != undefined) {
+				var txtArray = story.text.split(" ");
+
+				if(txtArray.length >= 3)
+					storyPreview = story.number + ". " + txtArray[0] + " " + txtArray[1] + " " + txtArray[2] + " ...";
+				else
+					storyPreview = story.number + ". " + story.text;
+			}
+			story.preview = storyPreview;
+
+			// Image Paths
+			if(story.modifier_img != '')
+				story.modifier_img_fullpath = urlModifiers + story.modifier_img;
+
+			if(story.bg_img != '')
+				story.bg_img_fullpath = urlModifiers + story.bg_img;
+	};
 
 })(module.exports);
