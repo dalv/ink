@@ -1,20 +1,37 @@
 body {
-   background-color:#e5e5e5;
-   color:#666;
-   font:normal 13px Roboto,arial,sans-serif;
-   padding:0px;
+  background-image: url("../.././img/background.jpg");
+  background-size:  cover;
+  background-repeat:no-repeat;
+  background-position:top;
+  background-color: #475478;
 }
 
-.container{
-	width:80%;
+.frame {
+  background-image: url("../.././img/picture-frame.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
 	margin-left:auto;
 	margin-right:auto;
+	width: 800px;
+  height: 700px;
 }
 
-ul {	
+.container {
+  padding-top: 150px;
+  margin: 0 130px;
+}
+
+#story {
+	color: white;
+}
+
+ul {
 	list-style-type: none;
 }
 
 li {
+  color: white;
+  font-weight: bold;
 	cursor:pointer;
 }
