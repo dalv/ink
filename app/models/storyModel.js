@@ -17,6 +17,7 @@ var StorySchema = new mongoose.Schema({
 		modifier: 						 { type: Boolean, default : false },
 		modifier_text: 				 { type: String, default : "" },
 		modifier_desc: 				 { type: String, default : "" },
+		modifier_type:				 { type: Number, default : 0 },
 		modifier_img: 				 { type: String, default : "" },
 		modifier_img_fullpath: { type: String, default : "" },
 		redirect: 						 { type: Boolean, default : false },

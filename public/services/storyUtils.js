@@ -33,20 +33,20 @@
 		};		
 
     // --------------------------------------------------
-    // Get risk level text by value
+    // Get text property by value from given array
     // --------------------------------------------------
-		var getRiskLevelText = function(riskLevels, riskLevelValue) {
+		var getArrayTextByValue = function(array, value) {
 			var text = undefined;
-			if(riskLevels != undefined)	{
-				for (var i = 0; i < riskLevels.length; i++) {
-					if(riskLevels[i].value == riskLevelValue) {
-						text = riskLevels[i].text;
+			if(array != undefined)	{
+				for (var i = 0; i < array.length; i++) {
+					if(array[i].value == value) {
+						text = array[i].text;
 						break;
 					}
 				}
 			}
 			return text;
-		};		
+		};			
 
     // --------------------------------------------------
     // Build story cards using story array and previous cards
@@ -90,7 +90,7 @@
     // --------------------------------------------------
 		return {
 			getStoryPreviewById : getStoryPreviewById,
-			getRiskLevelText : getRiskLevelText,
+			getArrayTextByValue : getArrayTextByValue,
 			buildCards : buildCards
 	  };
   };

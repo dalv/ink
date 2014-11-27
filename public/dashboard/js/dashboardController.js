@@ -13,6 +13,9 @@
 		var onGetRiskLevels = function(data){ 
 			$scope.riskLevels = data; 
 		};
+		var onGetModifierTypes = function(data){ 
+			$scope.modifierTypes = data; 
+		};		
 		var onGetBgImages = function(data){ 
 			$scope.bgImages = data; 
 		};
@@ -26,6 +29,7 @@
 		var onFirstLoad = function(){
 			dataAccess.getStories().then(onGetStories, onDataAccessError);
 			dataAccess.getRiskLevels().then(onGetRiskLevels, onDataAccessError);
+			dataAccess.getModifierTypes().then(onGetModifierTypes, onDataAccessError);			
 			dataAccess.getBgImages().then(onGetBgImages, onDataAccessError);
 			dataAccess.getModifierImages().then(onGetModifierImages, onDataAccessError);		
 		};
@@ -86,8 +90,15 @@
 		// Get risk level text by value
 		// --------------------------------------------------
 		$scope.getRiskLevelText = function(selectedValue) {
-			return storyUtils.getRiskLevelText($scope.riskLevels, selectedValue);
+			return storyUtils.getArrayTextByValue($scope.riskLevels, selectedValue);
 		};
+
+		// --------------------------------------------------
+		// Get modifier type text by value
+		// --------------------------------------------------
+		$scope.getModifierTypeText = function(selectedValue) {
+			return storyUtils.getArrayTextByValue($scope.modifierTypes, selectedValue);
+		};		
 
 		// --------------------------------------------------
 		// Handle pagination

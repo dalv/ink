@@ -55,6 +55,10 @@
 		var getRiskLevels = function() {
 			return unwrap($http.get('/api/riskLevels/'));
 		};
+
+		var getModifierTypes = function() {
+			return unwrap($http.get('/api/modifiertypes/'));
+		};		
 		
     // --------------------------------------------------
     // Expose inner properties from http promise object
@@ -86,7 +90,8 @@
 			deleteOption : deleteOption,
 			getBgImages : getBgImages,
   		getModifierImages : getModifierImages,
-  		getRiskLevels : getRiskLevels
+  		getRiskLevels : getRiskLevels,
+  		getModifierTypes : getModifierTypes
 	  };
   };
 

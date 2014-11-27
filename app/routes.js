@@ -49,4 +49,7 @@ module.exports = function(app) {
 
 	// Get risk levels
 	app.get('/api/riskLevels', api.getRiskLevels);	
+
+	// Get modifier types
+	app.get('/api/modifiertypes', api.getModifierTypes);		
 }

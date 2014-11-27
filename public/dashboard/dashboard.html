@@ -98,13 +98,21 @@
 							<pre>{{card.story.modifier_desc || 'Modifier description'}}</pre>
 						</div>					
 				  	<table> <tr><td>
-				  		<div>Modifier image: </div>	</td><td>
+				  		<div>Modifier image: </div>	
+				  	</td><td>
 				  		<div buttons="no" editable-select="card.story.modifier_img"
 				  			e-ng-options="img as img for img in modifierImages" onaftersave="updateStory(card.story)"> 
 			  				{{card.story.modifier_img || '-- none --'}} 
 		  				</div> </td></tr>
 	  					<tr><td>
 	  						<img class="imgModifier" ng-show="card.story.modifier_img!=''" ng-src="{{card.story.modifier_img_fullpath}}"/>
+	  					</td></tr>
+	  					<tr><td>
+	  						<table> <tr><td><div>Type:</div></td><td>
+	  						<div class="modifierType" buttons="no" editable-select="card.story.modifier_type"
+								e-ng-options="level.value as level.text for level in modifierTypes" onaftersave="updateStory(card.story)"> 
+								{{getModifierTypeText(card.story.modifier_type) || 'undefined'}} 
+								</td></tr></table>	
 	  					</td></tr>
   					</table>	
 
@@ -169,11 +177,13 @@
 						</div> </td></tr>
 					</table>	
 
-					<!-- --> <hr/> <!-- -->	
+
+					<!-- <hr/> -->	
 	
 					<!-- ================ -->	
 					<!-- Background image -->
 					<!-- ================ -->	
+					<!--
 					<table> <tr><td>
 						<div>Background image: </div>	</td><td>
 						<div buttons="no" editable-select="card.story.bg_img"
@@ -184,7 +194,8 @@
 							<img class="imgBackground" ng-show="card.story.bg_img!=''" ng-src="{{card.story.bg_img}}"/>
 						</td></tr>
 					</table>	
-			    
+			    -->
+
 				</div>
 			</div>
 

@@ -5,6 +5,7 @@
 	var StoryModel = require('./models/storyModel').StoryModel;
 	var OptionModel = require('./models/storyModel').OptionModel;	
 	var RiskLevelModel = require('./models/riskLevelModel').RiskLevelModel;	
+	var ModifierTypeModel = require('./models/modifierTypeModel').ModifierTypeModel;	
 
   //var imgFolder =  __dirname + '../../public/img/';
   var imgFolder =  process.cwd() + "/public/img/";
@@ -87,6 +88,7 @@
 				modifier: 						req.body.modifier,
 				modifier_text: 				req.body.modifier_text,
 				modifier_desc: 				req.body.modifier_desc,
+				modifier_type: 				req.body.modifier_type,
 				modifier_img: 				req.body.modifier_img,
 				redirect: 						req.body.redirect,
 				redirect_seconds: 		req.body.redirect_seconds,	
@@ -173,6 +175,19 @@
 				res.json(riskLevels);
 		});
 	};
+
+	// =============================================
+	// Get modifier types
+	// =============================================  
+	api.getModifierTypes = function(req, res) {
+		ModifierTypeModel.find({}, function(err, modifierTypes) {	
+			if (err)
+				res.send(err)
+			else
+				res.json(modifierTypes);
+		});
+	};
+
 
 	// =============================================
 	// Test method for various stuff
