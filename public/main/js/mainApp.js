@@ -1,1 +1,1 @@
-var app = angular.module('ink', ['dataAccess', 'storyUtils']);
+var app = angular.module('ink', ['dataAccess', 'inventoryHandler']);
