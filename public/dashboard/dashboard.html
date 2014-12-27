@@ -14,12 +14,15 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
 	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
+	<script src="http://www.gojs.net/latest/release/go-debug.js"></script>
+
 
   <!-- App: controler and services -->
 	<script src="js/dashboardApp.js"></script>
 	<script src="js/dashboardController.js"></script>
 	<script src="../services/dataAccess.js"></script>
 	<script src="../services/storyUtils.js"></script>
+	<script src="../services/diagramBuilder.js"></script>
 
 </head>
 
@@ -206,6 +209,8 @@
 		  <pagination direction-links="false" boundary-links="true" total-items="cards.length" items-per-page="numPerPage" ng-model="currentPage"></pagination>
 
 		</div>
+
+		<div id="storyDiagram" style="border: solid 1px blue; width:1150px; height:420px"></div>
 
 	</div>
 </body>

@@ -1,6 +1,6 @@
 (function() {
 
-	angular.module("dashboard").controller('dashboardController', function($scope, dataAccess, storyUtils) {
+	angular.module("dashboard").controller('dashboardController', function($scope, dataAccess, storyUtils, diagramBuilder) {
 
 		$scope.cards = [];
 
@@ -9,6 +9,7 @@
 		// ==================================================
 		var onGetStories = function(data){ 
 			$scope.cards = storyUtils.buildCards(data, $scope.cards);
+			diagramBuilder.buildDiagram(data);
 		};
 		var onGetRiskLevels = function(data){ 
 			$scope.riskLevels = data; 
