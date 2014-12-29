@@ -29,7 +29,10 @@ module.exports = function(app) {
 	app.get('/api/stories', api.getAll);
 
 	// Get one story
-	app.get('/api/stories/:story_id', api.getOne);
+	app.get('/api/story/:story_id', api.getOne);
+
+	// Get story list
+	app.get('/api/stories/:story_id_list', api.getList);
 
 	// Create story
 	app.post('/api/stories', api.create);

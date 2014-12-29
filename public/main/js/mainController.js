@@ -9,14 +9,10 @@
     // ==================================================
     // --------------------  On Load  -------------------
     // ==================================================
-		var onGetStory = function(data){
+		var onGetStory = function(data){	
 			$scope.story = data;
 			$scope.storyPath.push(data._id);
-
-			var newInventoryItem = inventoryHandler.buildInventoryItem($scope.story);
-			if (newInventoryItem!=null) {
-				$scope.inventory.push(newInventoryItem);
-			}
+			inventoryHandler.appendToInventory($scope.inventory, $scope.story, $scope.storyPath);
 		};
 
 		var onDataAccessError = function(err){
@@ -26,6 +22,10 @@
 		$scope.loadStory = function(storyId)	{
 			dataAccess.getStory(storyId).then(onGetStory, onDataAccessError);			
 		}
+
+		$scope.buildInventory = function(){
+			$scope.inventory = inventoryHandler.buildInventoryList($scope.storyPath);
+		};
 
 		$scope.loadStory();
 

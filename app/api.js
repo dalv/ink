@@ -62,6 +62,29 @@
 		}
 	};
 
+
+	// =============================================
+	// Return list of story objects by list of ids
+	// =============================================  
+	api.getList = function(req, res) {
+
+		var storyIdListJson = req.params.story_id_list;
+		var storyIdList = JSON.parse(storyIdListJson);
+
+		StoryModel.find({'_id' : { $in : storyIdList }})
+						.sort({date: 'asc'})
+						.exec(function(err, stories) {	
+			if (err) {
+				res.send(err);
+			}
+			else { 
+				enhanceStories(stories, req);
+				res.json(stories);
+			} 
+		});
+	};
+
+
 	// =============================================
 	// Create new story in the db
 	// =============================================  

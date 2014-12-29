@@ -9,7 +9,7 @@
     // Define public methods
     // --------------------------------------------------
 		var getTest = function() {
-			return unwrap($http.get('/api/test/'));
+		//	return unwrap($http.get('/api/test/'));
 		};
 
 		var getStories = function() {
@@ -17,7 +17,11 @@
 		};
 
 		var getStory = function(storyId) {
-			return unwrap($http.get('/api/stories/' + storyId));
+			return unwrap($http.get('/api/story/' + storyId));
+		};
+
+		var getStoryList = function(storyIdList) {
+			return unwrap($http.get('/api/stories/' + storyIdList));
 		};
 
 		var createStory = function(story) {
@@ -82,7 +86,8 @@
 		return {
 			getTest : getTest,
 			getStories : getStories,
-			getStory : getStory,			
+			getStory : getStory,		
+			getStoryList: getStoryList,	
 			createStory : createStory,
 			updateStory : updateStory,			
 			deleteStory : deleteStory,

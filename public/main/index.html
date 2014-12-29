@@ -55,8 +55,7 @@
       
       <tr ng-repeat="item in inventory | filter:{type:modifier_type}">
         <td> 
-          <div>{{item.text}}</div>
-          <img height="32" width="32" ng-show="item.img!=''" ng-src="{{item.img}}" /> 
+          <img height="32" width="32" ng-show="item.img!=''" ng-src="{{item.img}}" title="{{item.text}}"/> 
         </td>
       </tr>
 
