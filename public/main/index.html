@@ -21,45 +21,47 @@
 
 <body ng-controller="mainController">
 
-  <!-- Story frame -->
-	<div class="frame">
-    <div class="container">
-  		
-      <!-- Story text -->
-  		<div id="story">{{story.text}}</div>
-
-  		<!-- Story options -->
-  		<div id="options">
-  			<ul>
-  				<li ng-repeat="option in story.opts" ng-click="loadStory(option.next)">{{option.text}}</li>
-  			</u>
-  		</div>
-
-  		<!-- Story modifier -->
-  		<div id="modifier" ng-show="story.modifier">
-  			<div>{{story.modifier_text}}</div>
-  			<img height="32" width="32" ng-show="story.modifier_img!=''" ng-src="{{story.modifier_img_fullpath}}"/>
-  		</div>
-
-    </div>
-  </div>
-
   <!-- Inventory panel -->
-  <div class="inventory" ng-show="inventory.length>0">
+  <div id="inventoryPanel" ng-show="inventory.length>0">
     <table border="1" ng-repeat="modifier_type in [1,0]">   
      
       <th ng-switch on="modifier_type">
-        <div ng-switch-when="1">Major Modifiers</div> 
-        <div ng-switch-when="0">Minor Modifiers</div> 
+        <div ng-switch-when="1">Major</div> 
+        <div ng-switch-when="0">Minor</div> 
       </th>
       
       <tr ng-repeat="item in inventory | filter:{type:modifier_type}">
         <td> 
-          <img height="32" width="32" ng-show="item.img!=''" ng-src="{{item.img}}" title="{{item.text}}"/> 
+          <img class="modifier" ng-show="item.img!=''" ng-src="{{item.img}}" title="{{item.text}}"/> 
         </td>
       </tr>
 
     </table>
+  </div>
+
+  <!-- Story frame -->
+  <div id="storyPanel">
+  	<div id="storyFrame">
+      <div id="storyContainer">
+    		
+        <!-- Story text -->
+    		<div id="storyText">{{story.text}}</div>
+
+    		<!-- Story options -->
+    		<div id="storyOptions">
+    			<ul>
+    				<li ng-repeat="option in story.opts" ng-click="loadStory(option.next)">{{option.text}}</li>
+    			</u>
+    		</div>
+
+    		<!-- Story modifier -->
+    		<div id="storyModifier" ng-show="story.modifier">
+    			<div>{{story.modifier_text}}</div>
+    			<img class="modifier" ng-show="story.modifier_img!=''" ng-src="{{story.modifier_img_fullpath}}"/>
+    		</div>
+
+      </div>
+    </div>
   </div>
 
 </body>

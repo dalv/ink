@@ -30,8 +30,6 @@
       var inventoryList = [];
       var storyIdListJson = JSON.stringify(storyIdList);
       
-      dataAccess.getTest();
-
       dataAccess.getStoryList(storyIdListJson).then(function(storyList){
           if (storyList != undefined && storyList != "") {
             storyList.forEach(function(story){

@@ -6,7 +6,40 @@ body {
   background-color: #475478;
 }
 
-.frame {
+#inventoryPanel {
+  float: left;
+  width: 250px;  
+}
+
+#inventoryPanel table{
+  border: 0px;
+  display:inline-block;
+  vertical-align:top;
+}
+
+#inventoryPanel table td{
+  width:100px;
+  height:100px; 
+  border:1px solid black;
+  border-spacing:0px;
+}
+
+#inventoryPanel table th{
+  width:100px;
+}
+
+img.modifier{
+  width:100px;
+  height:100px;
+  display:block;
+}
+
+#storyPanel {
+  float: none; 
+  overflow: hidden; 
+}
+
+#storyFrame {
   background-image: url("../.././img/picture-frame.png");
   background-repeat:no-repeat;
   background-size:contain;
@@ -17,13 +50,19 @@ body {
   height: 700px;
 }
 
-.container {
+#storyContainer {
   padding-top: 150px;
   margin: 0 130px;
 }
 
-#story {
+#storyText {
 	color: white;
+}
+
+#storyModifier * {
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 ul {
