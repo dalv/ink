@@ -4,7 +4,3 @@ Main App:
 - Breadcrumb save
 
 Dashboard:
-- Exhaustible needs to be aware of which options are gone and show new options accordingly
-- Problems with page update after edit: 
-		1. Story preview after story text edit
-		2. Options after New Option
